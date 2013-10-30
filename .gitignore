@@ -3,6 +3,8 @@ settings.py
 *.json
 static/media
 
+.DS_Store
+
 *.py[cod]
 
 # C extensions
