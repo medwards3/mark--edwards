@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block navSchedule %}class="active"{% endblock %}
+{% block carouselMark %}class="item active"{% endblock %}
+{% block carouselBach %}class="item"{% endblock %}
+{% block content %}
+
+    	<div class="row">
+            {% for event in events %}
+    		<div class="span12">
+    			<img class="img-circle" data-src="holder.js/140x140">
+    			<h2 class="text-left">
+    				{{event.title}}
+    			</h2>
+                <p>
+                    <span>{{ event.time }}</span> <span class="pull-right">{{event.where}}</span>
+                </p>
+    			<hr>
+    			<p>
+    				{{ event.description|safe }}
+    			</p>
+    		</div>
+            {% endfor %}
+    	</div>
+{% endblock %}

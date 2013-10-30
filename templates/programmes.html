@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block navProgrammes %}class="active"{% endblock %}
+{% block carouselMark %}class="item"{% endblock %}
+{% block carouselBach %}class="item active"{% endblock %}
+
+{% block content %}
+
+    	<div class="row">
+                <div class="span4">
+                    <div class="text-center">
+                        <a href="/programmes/goldbergs" class="lead">The Goldberg Variations</a>
+                    </div>
+                </div>
+                <div class="span4">
+                     <div class="text-center">
+                        <a href="allemande" class="lead">Les faces cachées de l'allemande</a>
+                    </div>
+                </div>
+                <div class="span4">
+                     <div class="text-center">
+                        <a href="titans" class="lead">The Battle of the Titans</a>
+                    </div>
+                </div>
+                
+    	</div>
+{% endblock %}

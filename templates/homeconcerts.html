@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block navHome %}class="active"{% endblock %}
+{% block carouselMark %}class="item active"{% endblock %}
+{% block carouselBach %}class="item"{% endblock %}
+
+{% block content %}
+	<div class="row">
+            <div class="span12">
+                <h2 class="text-center"> Next Concert: </h2>
+            <hr>
+            </div>
+            <div class="span12">
+                <img class="img-circle" data-src="holder.js/140x140">
+                <h2 class="text-left">
+                    {{event.title}}
+                </h2>
+                <p>
+                    <span>{{ event.time }}</span> <span class="pull-right">{{event.where}}</span>
+                </p>
+                <hr>
+                <p>
+                    {{ event.description|safe }}
+                </p>
+            </div>
+            
+        </div>
+{% endblock %}

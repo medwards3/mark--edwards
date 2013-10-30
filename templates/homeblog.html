@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block navHome %}class="active"{% endblock %}
+{% block carouselMark %}class="item active"{% endblock %}
+{% block carouselBach %}class="item"{% endblock %}
+
+{% block content %}
+	<div class="row">
+            {% for post in posts %}
+    		<div class="span12">
+    			<img class="img-circle" data-src="holder.js/140x140">
+    			<h2 class="text-center">
+    				{{post.title}}
+    			</h2>
+                <p>
+                    <span>{{ post.created }}</span> 
+                </p>
+    			<hr>
+    			<p>
+    				{{ post.content|safe }}
+    			</p>
+    		</div>
+            {% endfor %}
+    </div>
+{% endblock %}
