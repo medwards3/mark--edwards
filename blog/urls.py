@@ -5,10 +5,6 @@ from django.utils import timezone
 
 
 urlpatterns = patterns('',
-	url(r'^$',
-        ListView.as_view(
-            queryset=Post.objects.order_by('-created')[:5],
-            context_object_name='posts',
-            template_name='blog/index.html'),
-        name='index'),
+	url(r'^$','blog.views.index'),
+	url(r'^(?P<slug>[\w\-]+)/$', 'blog.views.post')
 )

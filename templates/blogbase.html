@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block navBlog %}class="active"{% endblock %}
+{% block carouselMark %}class="item active"{% endblock %}
+{% block carouselBach %}class="item"{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="span10">
+        {% block blogContent %}{% endblock %}
+    </div>
+    <div class="span2">
+        <ul class="nav nav-list">
+          <li class="nav-header">Categories</li>
+          <li><a href="#">Concerts</a></li>
+          <li><a href="#">Recordings</a></li>
+          <li class="nav-header">Archives</li>
+          <li><a href="#">Placeholder</a></li>
+
+        </ul>
+    </div>
+</div>
+{% endblock %}

@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 import json
 import urllib.request, urllib.error, urllib.parse
 from datetime import datetime
+from blog.models import Post
 
 def get_json():
 	feed = urllib.request.urlopen("https://www.google.com/calendar/feeds/41lp9k24ggd5e2u5no7tmpldlg%40group.calendar.google.com/public/full?orderby=starttime&sortorder=ascending&futureevents=true&alt=json").read()
@@ -46,12 +47,16 @@ def parse_year(ystring):
 
 
 
-
-
 def home(request):
+	posts = Post.objects.order_by('-created')[:1]
+	return render(request, 'home.html', {'posts':posts})
+
+# I used the following code for returning my next concert.
+'''def home(request):
 	feed = get_json()
 	parsed = json_parse_one(feed)
 	return render(request, 'home.html', {'event': parsed})
+'''
 
 def bio(request):
 	return render(request, 'bio.html')
