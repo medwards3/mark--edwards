@@ -3,7 +3,7 @@ settings.py
 *.json
 static/media
 
-*.DS_Store
+.DS_Store
 
 *.py[cod]
 
