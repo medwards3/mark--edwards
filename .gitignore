@@ -2,6 +2,7 @@
 settings.py
 *.json
 static/media
+migrations
 
 .DS_Store
 

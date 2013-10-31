@@ -10,12 +10,14 @@
     <div class="span2">
         <ul class="nav nav-list">
           <li class="nav-header">Categories</li>
-          <li><a href="#">Concerts</a></li>
-          <li><a href="#">Recordings</a></li>
+          {% for category in categories %}
+          <li><a href="#">{{ category.title }}</a></li>
+          {% endfor %}
           <li class="nav-header">Archives</li>
           <li><a href="#">Placeholder</a></li>
 
         </ul>
     </div>
 </div>
+
 {% endblock %}

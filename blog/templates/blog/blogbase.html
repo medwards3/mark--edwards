@@ -18,4 +18,12 @@
         </ul>
     </div>
 </div>
+<ul class="pager">
+  {% if page > 1 %}
+    <li><a href="{% url 'blog_index' page|add:'-1' %}">Previous</a></li>
+  {% endif %}
+  {% if page <= 1 %}
+  <li><a href="{% url 'blog_index' page|add:'1' %}">Next</a></li>
+  {% endif %}
+</ul>
 {% endblock %}

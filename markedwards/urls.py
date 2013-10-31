@@ -16,7 +16,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
    
-    url(r'^$', 'markedwards.views.home'),
+    url(r'^$', 'markedwards.views.home', name="home"),
     url(r'^bio/', 'markedwards.views.bio'),
     url(r'^press/', 'markedwards.views.press'),
     url(r'^schedule/', 'markedwards.views.schedule'),
@@ -27,6 +27,6 @@ urlpatterns = patterns('',
     url(r'^discography/', 'markedwards.views.discography'),
     url(r'^media/', 'markedwards.views.media'),
     url(r'^links/', 'markedwards.views.links'),
-    url(r'^blog/', include ('blog.urls', namespace="blog")),
+    url(r'^blog/', include ('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
