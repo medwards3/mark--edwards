@@ -12,7 +12,25 @@ def get_json():
 	feed = urllib.request.urlopen("https://www.google.com/calendar/feeds/41lp9k24ggd5e2u5no7tmpldlg%40group.calendar.google.com/public/full?orderby=starttime&sortorder=ascending&futureevents=true&alt=json").read()
 	return feed
 
+def get_past_json():
+	google_date = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+	feed = urllib.request.urlopen("https://www.google.com/calendar/feeds/41lp9k24ggd5e2u5no7tmpldlg%40group.calendar.google.com/public/full?orderby=starttime&sortorder=descending&start-max={}&alt=json".format(google_date)).read()
+	return feed
+
 def json_parse(feed):
+	parsed = json.loads(feed.decode("utf8"))
+	jlist = []
+	for item in parsed['feed']['entry']:
+		jitem = {}
+		jitem['title'] = item['title']['$t']
+		jitem['description'] = item['content']['$t']
+		to_parse = item["gd$when"][0]['startTime']
+		jitem['time'] = parse_year(to_parse)
+		jitem['where'] = item["gd$where"][0]['valueString']
+		jlist.append(jitem)
+	return jlist
+
+def json_parse_past(feed):
 	parsed = json.loads(feed.decode("utf8"))
 	jlist = []
 	for item in parsed['feed']['entry']:
@@ -68,6 +86,11 @@ def schedule(request):
 	feed = get_json()
 	parsed = json_parse(feed)
 	return render(request, 'schedule.html', {'events': parsed})
+
+def past_schedule(request):
+	feed = get_past_json()
+	parsed = json_parse_past(feed)
+	return render(request, 'past_schedule.html', {'events': parsed})
 
 def programmes(request):
 	return render(request, 'programmes.html')

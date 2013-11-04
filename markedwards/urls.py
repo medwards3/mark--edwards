@@ -1,5 +1,4 @@
 from django.conf.urls import patterns, include, url
-from django.views.generic import DetailView, ListView
 from blog.models import Post
 
 # Uncomment the next two lines to enable the admin:
@@ -19,7 +18,8 @@ urlpatterns = patterns('',
     url(r'^$', 'markedwards.views.home', name="home"),
     url(r'^bio/', 'markedwards.views.bio'),
     url(r'^press/', 'markedwards.views.press'),
-    url(r'^schedule/', 'markedwards.views.schedule'),
+    url(r'^schedule/$', 'markedwards.views.schedule', name="schedule"),
+    url(r'^schedule/past/$', 'markedwards.views.past_schedule', name="past_schedule"),
     url(r'^programmes/$', 'markedwards.views.programmes'),
     url(r'^programmes/goldbergs', 'markedwards.views.goldbergs'),
     url(r'^programmes/allemande', 'markedwards.views.allemande'),

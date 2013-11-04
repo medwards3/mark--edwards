@@ -1,18 +1,37 @@
+import json
+import urllib.request, urllib.error, urllib.parse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import Context, loader
 from django.http import Http404
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-import json
-import urllib.request, urllib.error, urllib.parse
 from datetime import datetime
 from blog.models import Post, Category
+from calendar import month_name
+
+
 
 def side_panel(dictionary):
 	categories = Category.objects.all()
 	dictionary['categories']=categories
+	
+	now_year = datetime.now().year
+	now_month = datetime.now().month
+	first = Post.objects.order_by('created')[0]
+	first_year = first.created.year
+	first_month = first.created.month
+	year_dict = {}
+	for year in range(first_year, now_year + 1):
+		year_dict[year] = []
+		for month in range(first_month, 13):
+			year_dict[year].append(month_name[month])
+			if month == now_month and year == now_year:
+				break
+		first_month = 1
+	dictionary['archive_list'] = year_dict
 	return dictionary
+   
 
 
 def pagination(request, posts):
@@ -38,19 +57,26 @@ def index(request):
 
 
 def post(request, slug):
-    # get the Post object
-    post = get_object_or_404(Post, slug=slug)
-    # now return the rendered template
-    return render(request, 'blog/post.html', {'post': post})
+	# get the Post object
+	post = get_object_or_404(Post, slug=slug)
+	# now return the rendered template
+	return render(request, 'blog/post.html', {'post': post})
 
 def categories(request, category):
-	'''try:
+	try:
 		the_category = Category.objects.get(title=category)
 	except:
-		return HttpResponseRedirect(reverse('index', urlconf='markedwards.urls'))'''
-	return HttpResponseRedirect(reverse('index', urlconf='markedwards.urls'))
-	posts = Post.objects.filter(title=the_category)
+		return HttpResponseRedirect(reverse('index', urlconf='markedwards.urls'))
+	
+	posts = Post.objects.filter(categories=the_category)
 	posts = pagination(request,posts)
 	template_dict = side_panel({'posts':posts})
 	return render(request, 'blog/index.html', template_dict)
+
+def archives(request, year, month):
+	month = str(list(month_name).index(month))
+	posts = Post.objects.filter(created__year=year, created__month=month)
+	template_dict = side_panel({'posts':posts})
+	return render(request, 'blog/index.html', template_dict)
+
 

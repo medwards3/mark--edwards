@@ -1,17 +1,22 @@
 from django.db import models
 from django.utils import timezone
+from django.core.urlresolvers import reverse
 import datetime
 
 # Create your models here.
 
 class Category(models.Model):
 	title = models.CharField(unique=True, max_length=255)
-	def __str__(self):
-		return self.title
-
+	
 	class Meta:
 		verbose_name = "Category"
 		verbose_name_plural = "Categories"
+
+	def get_absolute_url(self):
+		return reverse('blog.views.categories', args=[self.title])
+
+	def __str__(self):
+		return self.title
 
 class Post(models.Model):
 	title = models.CharField(max_length=255)
