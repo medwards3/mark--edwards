@@ -60,7 +60,8 @@ def post(request, slug):
 	# get the Post object
 	post = get_object_or_404(Post, slug=slug)
 	# now return the rendered template
-	return render(request, 'blog/post.html', {'post': post})
+	template_dict = side_panel({'post':post})
+	return render(request, 'blog/post.html', template_dict)
 
 def categories(request, category):
 	try:
